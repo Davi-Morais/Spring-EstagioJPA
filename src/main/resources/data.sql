@@ -11,7 +11,7 @@ INSERT INTO tb_usuario_role (usuario_id, role_id) VALUES (2, 2);
 INSERT INTO tb_usuario_role (usuario_id, role_id) VALUES (3, 2);
 
 
-INSERT INTO tb_categoria (descricao) VALUES ('Eletrônicos');
+/* INSERT INTO tb_categoria (descricao) VALUES ('Eletrônicos');
 INSERT INTO tb_categoria (descricao) VALUES ('Alimentos');
 INSERT INTO tb_categoria (descricao) VALUES ('Jogos');
 
@@ -22,4 +22,4 @@ INSERT INTO tb_produto (preco, quantidade, descricao, nome) VALUES (4000.0, 3, '
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1, 1);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (1, 3);
 INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (2, 1);
-INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3, 1);
+INSERT INTO tb_produto_categoria (produto_id, categoria_id) VALUES (3, 1); */
