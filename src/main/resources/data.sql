@@ -49,7 +49,7 @@ INSERT INTO tb_estagio (inicio_estagio, fim_estagio, carga_horaria, status, alun
 
 
     /*  Opcoes de resposta: 
-	 *  - insuficiente
+	*  - insuficiente
      *  - regular
      *  - bom
      *  - muito bom 
@@ -63,3 +63,13 @@ INSERT INTO tb_avaliacao_do_professor (assiduidade, disciplina, sociabilidade, r
                 VALUES ('regular', 'insuficiente', 'bom', 'regular', 'muito bom', 3, 2);
 INSERT INTO tb_avaliacao_do_professor (assiduidade, disciplina, sociabilidade, responsabilidade, iniciativa, aluno_id, orientador_id)
                 VALUES ('regular', 'bom', 'bom', 'regular', 'bom', 4, 2);
+
+
+INSERT INTO tb_avaliacao_da_empresa (rendimento, conhecimentos, cumprimentos, aprendizagem, desempenho, aluno_id, empresa_id)
+                VALUES ('bom', 'muito bom', 'regular', 'muito bom', 'insuficiente', 1, 1);
+INSERT INTO tb_avaliacao_da_empresa (rendimento, conhecimentos, cumprimentos, aprendizagem, desempenho, aluno_id, empresa_id)
+                VALUES ('muito bom', 'regular', 'bom', 'bom', 'regular', 2, 1);
+INSERT INTO tb_avaliacao_da_empresa (rendimento, conhecimentos, cumprimentos, aprendizagem, desempenho, aluno_id, empresa_id)
+                VALUES ('muito bom', 'regular', 'muito bom', 'regular', 'insuficiente', 3, 2);
+INSERT INTO tb_avaliacao_da_empresa (rendimento, conhecimentos, cumprimentos, aprendizagem, desempenho, aluno_id, empresa_id)
+                VALUES ('bom', 'muito bom', 'regular', 'muito bom', 'insuficiente', 4, 2);
