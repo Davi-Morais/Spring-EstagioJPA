@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.estagiojpa.estagio.dtos.EstagioDTO;
-import com.estagiojpa.estagio.dtos.OrientadorDTO;
 import com.estagiojpa.estagio.services.EstagioService;
 
 

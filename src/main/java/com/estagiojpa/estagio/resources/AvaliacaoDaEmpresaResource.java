@@ -19,52 +19,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.estagiojpa.estagio.dtos.EmpresaDTO;
-import com.estagiojpa.estagio.services.EmpresaService;
+import com.estagiojpa.estagio.dtos.AvaliacaoDaEmpresaDTO;
+import com.estagiojpa.estagio.services.AvaliacaoDaEmpresaService;
+
+
 
 @RestController
-@RequestMapping(value = "/empresas")
-public class EmpresaResource {
+@RequestMapping(value = "/avaliacao/empresa")
+public class AvaliacaoDaEmpresaResource {
     @Autowired
-	private EmpresaService service;
-
-
+	private AvaliacaoDaEmpresaService service;
+    
     @GetMapping
-	public ResponseEntity<Page<EmpresaDTO>> findAll(
-        @RequestParam(value = "empresaId", defaultValue = "0") Long empresaId,
+	public ResponseEntity<Page<AvaliacaoDaEmpresaDTO>> findAll(
+        @RequestParam(value = "estagioId", defaultValue = "0") Long avaliacaoId,
         @RequestParam(value = "name", defaultValue = "") String nome,
         Pageable pageable) {
 		
-		Page<EmpresaDTO> list = service.findAllPaged(pageable);		
+		Page<AvaliacaoDaEmpresaDTO> list = service.findAllPaged(pageable);		
 		return ResponseEntity.ok().body(list);
 	}
-    
+
     @GetMapping(value = "/{id}")
-	public ResponseEntity<EmpresaDTO> findById(@PathVariable Long id) {
-		EmpresaDTO dto = service.findById(id);
+	public ResponseEntity<AvaliacaoDaEmpresaDTO> findById(@PathVariable Long id) {
+		AvaliacaoDaEmpresaDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 
-    @PostMapping
-	public ResponseEntity<EmpresaDTO> insert(@Valid @RequestBody EmpresaDTO dto) {
-		dto = service.insert(dto);
+
+    @PostMapping(value = "/{idAluno}/{idEmpresa}")
+	public ResponseEntity<AvaliacaoDaEmpresaDTO> insert(@Valid @RequestBody AvaliacaoDaEmpresaDTO dto,
+                                            @PathVariable Long idAluno,
+                                            @PathVariable Long idEmpresa) {
+		dto = service.insert(dto, idAluno, idEmpresa);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
 
-    @PostMapping(value = "/{idEmpresa}/{idAluno}")
-	public ResponseEntity<Integer> insert(@PathVariable Long idEmpresa, @PathVariable Long idAluno) {
-		
-        service.insertAluno(idEmpresa, idAluno);
-		return ResponseEntity.ok().body(1);
-	}
-
     @PutMapping(value = "/{id}")
-	public ResponseEntity<EmpresaDTO> update(@PathVariable Long id, @Valid @RequestBody EmpresaDTO dto) {
+	public ResponseEntity<AvaliacaoDaEmpresaDTO> update(@PathVariable Long id, @Valid @RequestBody AvaliacaoDaEmpresaDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
+
 
     @DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -95,7 +95,7 @@ public class EstagioService {
 		}
     }
 
-    private void copyDtoToEntity(EstagioDTO dto, Estagio entity) {
+    /* private void copyDtoToEntity(EstagioDTO dto, Estagio entity) {
         entity.setInicioEstagio(dto.getInicioEstagio());
         entity.setFimEstagio(dto.getFimEstagio());
         entity.setCargaHoraria(dto.getCargaHoraria());
@@ -104,5 +104,5 @@ public class EstagioService {
         entity.setAluno(alunoRepository.getOne(dto.getAluno().getId()));
         entity.setOrientador(orientadorRepository.getOne(dto.getOrientador().getId()));
         entity.setEmpresa(empresaRepository.getOne(dto.getEmpresa().getId()));
-    }
+    } */
 }

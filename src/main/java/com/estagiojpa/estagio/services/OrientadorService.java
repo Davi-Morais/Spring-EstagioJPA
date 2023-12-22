@@ -1,6 +1,5 @@
 package com.estagiojpa.estagio.services;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +67,10 @@ public class OrientadorService {
         Orientador orientador = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Orientador not found with id: " + id));
 
-        copyDtoToEntity(dto, orientador);
+        orientador.setNome(dto.getNome());
+        orientador.setEmail(dto.getEmail());
+
+
         orientador = repository.save(orientador);
         return new OrientadorDTO(orientador);
     }
