@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.estagiojpa.estagio.dtos.EstagioDTO;
+import com.estagiojpa.estagio.entities.Aluno;
+import com.estagiojpa.estagio.entities.Empresa;
 import com.estagiojpa.estagio.entities.Estagio;
+import com.estagiojpa.estagio.entities.Orientador;
 import com.estagiojpa.estagio.repositories.AlunoRepository;
 import com.estagiojpa.estagio.repositories.EmpresaRepository;
 import com.estagiojpa.estagio.repositories.EstagioRepository;
@@ -43,9 +46,26 @@ public class EstagioService {
     }
 
     @Transactional
-    public EstagioDTO insert(EstagioDTO dto) {
+    public EstagioDTO insert(EstagioDTO dto, Long idAluno, Long idOrientador, Long idEmpresa) {
         Estagio estagio = new Estagio();
-        copyDtoToEntity(dto, estagio);
+        estagio.setInicioEstagio(dto.getInicioEstagio());
+        estagio.setFimEstagio(dto.getFimEstagio());
+        estagio.setCargaHoraria(dto.getCargaHoraria());
+        estagio.setStatus(dto.getStatus());
+
+
+        Aluno aluno = alunoRepository.findById(idAluno)
+                .orElseThrow(() -> new ResourceNotFoundException("Aluno not found with id: " + idAluno));
+        Orientador orientador = orientadorRepository.findById(idOrientador)
+                .orElseThrow(() -> new ResourceNotFoundException("Orientador not found with id: " + idOrientador));
+        Empresa empresa = empresaRepository.findById(idEmpresa)
+                .orElseThrow(() -> new ResourceNotFoundException("Empresa not found with id: " + idEmpresa));
+
+
+        estagio.setAluno(aluno);
+        estagio.setOrientador(orientador);
+        estagio.setEmpresa(empresa);
+
         estagio = repository.save(estagio);
         return new EstagioDTO(estagio);
     }
@@ -55,7 +75,12 @@ public class EstagioService {
         Estagio estagio = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Estagio not found with id: " + id));
 
-        copyDtoToEntity(dto, estagio);
+        estagio.setInicioEstagio(dto.getInicioEstagio());
+        estagio.setFimEstagio(dto.getFimEstagio());
+        estagio.setCargaHoraria(dto.getCargaHoraria());
+        estagio.setStatus(dto.getStatus());
+
+
         estagio = repository.save(estagio);
         return new EstagioDTO(estagio);
     }

@@ -1,5 +1,7 @@
 package com.estagiojpa.estagio.services;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -45,11 +47,28 @@ public class EmpresaService {
     }
 
     @Transactional
+    public EmpresaDTO insertAluno(Long idEmpresa, Long idAluno) {
+        Empresa empresa = repository.findById(idEmpresa)
+                .orElseThrow(() -> new ResourceNotFoundException("Empresa not found with id: " + idEmpresa));
+        Aluno aluno = alunoRepository.findById(idAluno)
+                .orElseThrow(() -> new ResourceNotFoundException("Aluno not found with id: " + idAluno));
+
+        Set<Aluno> alunos =  empresa.getAlunos();
+        alunos.add(aluno);
+
+        empresa.setAlunos(alunos);
+
+        empresa = repository.save(empresa);
+        return new EmpresaDTO(empresa);
+    }
+
+    @Transactional
     public EmpresaDTO update(Long id, EmpresaDTO dto) {
         Empresa empresa = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Empresa not found with id: " + id));
 
-        copyDtoToEntity(dto, empresa);
+        empresa.setNome(dto.getNome());
+        empresa.setCnpj(dto.getCnpj());
         empresa = repository.save(empresa);
         return new EmpresaDTO(empresa);
     }

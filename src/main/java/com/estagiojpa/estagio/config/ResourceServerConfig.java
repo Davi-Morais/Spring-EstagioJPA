@@ -31,7 +31,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
-	private static final String[] OPERATOR_OR_ADMIN = { "/orientadores/**", "/alunos/**" };
+	private static final String[] OPERATOR_OR_ADMIN = { "/orientadores/**", "/alunos/**", "/empresas/**", "/estagios/**" };
 	
 	private static final String[] ADMIN = { "/usuarios/**" };	
 	
